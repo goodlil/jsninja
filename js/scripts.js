@@ -4,21 +4,41 @@ var quiz = [
     ["What is Batman's real name?","Bruce Wayne"]
 ];
 
-var score = 0 // initialize score
+var score = 0; // initialize score
 
-for(var i=0,max=quiz.length;i<max;i++) {
-    // get answer from user
-    var answer = prompt(quiz[i][0]); // quiz[i][0] is the ith question
+play(quiz);
+
+
+function play(quiz) {
+    //main game loop
+    document.write(quiz);
     
-    // check if answer is correct
-    if(answer === quiz[i][1]){ // quiz[i][1] is the ith answer
-    alert("Correct!");
     
-    // increase score by 1
-    score++;
+    for(var i=0, question, answer, max=quiz.length; i<max; i++) {
+        question = quiz[i][0];
+        answer = ask(question);
+        check(i,answer);
+        //document.write("<br /> Your answer is " + answer);
+    }
+    // end of main game loop
+    gameOver();
+}
+
+
+function ask(question) {
+    //document.write("<br /><br />Your question is: " + question);
+    return prompt(question); //quiz[i][0] is the ith questions
+}
+
+function check(i,answer) {
+    if (answer === quiz[i][1]) {
+        alert("Correct!");
+        score++;
     } else {
         alert("Wrong!");
     }
 }
 
-alert("Game Over, you scored " + score + " points");
+function gameOver() {
+    alert("game Over, you scored " + score + " points")
+}
